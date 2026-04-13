@@ -1,25 +1,43 @@
 import java.util.Scanner;
+
 public class bubblesort {
-    public static boolean cmp(int a,int b){
-        return a<b;
+    /**
+     * 比较函数：返回 a 是否应排在 b 前面。
+     */
+    public static boolean cmp(int a, int b) {
+        return a < b;
     }
+
     public static void main(String[] args) {
-        Scanner s=new Scanner(System.in);
-        int m[]=new int[128],n=s.nextInt();
-        for(int i=1;i<=n;i++){
-            m[i]=s.nextInt();
+        Scanner scanner = new Scanner(System.in);
+
+        // 输入数组长度和元素。
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
         }
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<n;j++){
-                if(cmp(m[j+1],m[j])){
-                    int tmp=m[j];
-                    m[j]=m[j+1];
-                    m[j+1]=tmp;
+
+        // 冒泡排序（升序）。
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - 1 - i; j++) {
+                if (cmp(arr[j + 1], arr[j])) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
             }
         }
-        for(int i=1;i<=n;i++){
-            System.out.print(m[i]+" ");
+
+        // 输出排序结果。
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i]);
+            if (i != n - 1) {
+                System.out.print(" ");
+            }
         }
+        System.out.println();
+
+        scanner.close();
     }
 }
