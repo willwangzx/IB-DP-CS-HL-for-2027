@@ -1,14 +1,19 @@
 import java.util.Scanner;
+
 public class printsum {
     public static void main(String[] args) {
-        Scanner s=new Scanner(System.in);//create a new scanner class to read input
-        int n=0;
-        int sum=0;
-        n=s.nextInt();//how many numbers will be input next
-        while(n!=0){
-            sum+=n;
-            n=s.nextInt();
+        // 创建 Scanner 读取用户输入。
+        Scanner scanner = new Scanner(System.in);
+
+        // 读取整数并累加；当读到 0 时结束。
+        int sum = 0;
+        int number = scanner.nextInt();
+        while (number != 0) {
+            sum += number;
+            number = scanner.nextInt();
         }
+
         System.out.println(sum);
+        scanner.close();
     }
 }

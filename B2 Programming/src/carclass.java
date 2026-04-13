@@ -1,42 +1,88 @@
 public class carclass {
-    static String brand;
-    static int number=0;
-    private String serial_number,model,engine,color;
-    private double fuel_amount,max_speed,speed,turn_angle;
-    public carclass(String serial_number,String color,double max_speed){
-        this.serial_number=serial_number;
-        this.color=color;
-        this.max_speed=max_speed;
+    // 类属性：所有汽车共享。
+    private static String brand;
+    private static int number = 0;
+
+    // 实例属性：每辆车独有。
+    private final String serialNumber;
+    private String model;
+    private String engine;
+    private String color;
+    private double fuelAmount;
+    private final double maxSpeed;
+    private double speed;
+    private double turnAngle;
+
+    public carclass(String serialNumber, String color, double maxSpeed) {
+        this.serialNumber = serialNumber;
+        this.color = color;
+        this.maxSpeed = maxSpeed;
         number++;
     }
-    public void setBrand(String b){
-        brand=b;
+
+    public static void setBrand(String b) {
+        brand = b;
     }
-    public Boolean drive(){
-        return speed!=0;
+
+    public static String getBrand() {
+        return brand;
     }
-    public double turn(double turn_angle){
-        this.turn_angle+=turn_angle;
-        return this.turn_angle;
+
+    public static int getNumber() {
+        return number;
     }
-    public double addfuel(double amount){
-        if(amount+this.fuel_amount>=60)this.fuel_amount=60;
-        else this.fuel_amount+=amount;
-        return fuel_amount;
+
+    /**
+     * 是否处于行驶状态。
+     */
+    public boolean drive() {
+        return speed != 0;
     }
-    public double remaining_fuel(){
-        return fuel_amount;
+
+    /**
+     * 转向：累计方向盘角度。
+     */
+    public double turn(double deltaAngle) {
+        this.turnAngle += deltaAngle;
+        return this.turnAngle;
     }
-    public double current_speed(){
+
+    /**
+     * 加油：油量上限 60。
+     */
+    public double addFuel(double amount) {
+        fuelAmount = Math.min(60, fuelAmount + amount);
+        return fuelAmount;
+    }
+
+    public double getRemainingFuel() {
+        return fuelAmount;
+    }
+
+    public double getCurrentSpeed() {
         return speed;
     }
-    public void accelerate(double dv){
-        speed+=dv;
+
+    /**
+     * 加速，同时限制最大车速。
+     */
+    public void accelerate(double deltaSpeed) {
+        speed = Math.min(maxSpeed, speed + deltaSpeed);
     }
+
     public void setColor(String color) {
         this.color = color;
     }
+
     public void setEngine(String engine) {
         this.engine = engine;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
     }
 }

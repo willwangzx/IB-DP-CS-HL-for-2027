@@ -1,40 +1,68 @@
-import java.util.ArrayList;
-class myarray{
-    static int[] ay;
-    myarray(int data[]){
-        ay=data;
-    }
-    public int max(){
-        if(ay.length<=0)return 0;
-        int ma=0;
-        for(int i=0;i<ay.length;i++){
-            if(ma<ay[i]){
-                ma=ay[i];
-            }
-        }
-        return ma;
-    }
-    public int min(){
-        if(ay.length<=0)return 0;
-        int mn=2147364847;
-        for(int i=0;i<ay.length;i++){
-            if(mn>ay[i]){
-                mn=ay[i];
-            }
-        }
-        return mn;
-    }
-    public void outp(){
-        for(int i=0;i<ay.length;i++){
-            System.out.print(ay[i]+" ");
-        }
-    }
-}
-public class arraye {
-    public static void main(String[] args) {
-        ArrayList<Integer> n=new ArrayList<Integer>();
-        int[] m=new int[114];
-        myarray a=new myarray(m);
+import java.util.Arrays;
+
+/**
+ * 简单的数组工具类：提供最大值、最小值和输出功能。
+ */
+class MyArray {
+    private final int[] data;
+
+    MyArray(int[] data) {
+        this.data = data;
     }
 
+    /**
+     * 返回数组中的最大值；空数组返回 0。
+     */
+    public int max() {
+        if (data.length == 0) {
+            return 0;
+        }
+
+        int maxValue = data[0];
+        for (int value : data) {
+            if (value > maxValue) {
+                maxValue = value;
+            }
+        }
+        return maxValue;
+    }
+
+    /**
+     * 返回数组中的最小值；空数组返回 0。
+     */
+    public int min() {
+        if (data.length == 0) {
+            return 0;
+        }
+
+        int minValue = data[0];
+        for (int value : data) {
+            if (value < minValue) {
+                minValue = value;
+            }
+        }
+        return minValue;
+    }
+
+    /**
+     * 打印数组内容（空格分隔）。
+     */
+    public void print() {
+        for (int value : data) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+}
+
+public class arraye {
+    public static void main(String[] args) {
+        int[] numbers = {8, 3, 5, 2, 9};
+        MyArray helper = new MyArray(numbers);
+
+        System.out.println("Array: " + Arrays.toString(numbers));
+        System.out.println("Max: " + helper.max());
+        System.out.println("Min: " + helper.min());
+        helper.print();
+    }
 }
