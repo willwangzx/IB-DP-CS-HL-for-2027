@@ -1,42 +1,77 @@
 public class carclass {
-    static String brand;
-    static int number=0;
-    private String serial_number,model,engine,color;
-    private double fuel_amount,max_speed,speed,turn_angle;
-    public carclass(String serial_number,String color,double max_speed){
-        this.serial_number=serial_number;
-        this.color=color;
-        this.max_speed=max_speed;
-        number++;
+    private static int carCount = 0;
+
+    private final String serialNumber;
+    private String brand;
+    private String color;
+    private final double maxSpeed;
+    private double speed;
+    private double fuel;
+
+    public carclass(String serialNumber, String brand, String color, double maxSpeed) {
+        this.serialNumber = serialNumber;
+        this.brand = brand;
+        this.color = color;
+        this.maxSpeed = maxSpeed;
+        this.speed = 0;
+        this.fuel = 0;
+        carCount++;
     }
-    public void setBrand(String b){
-        brand=b;
+
+    // 加油，最大油量按 60L 处理。
+    public void addFuel(double amount) {
+        if (amount > 0) {
+            fuel = Math.min(60, fuel + amount);
+        }
     }
-    public Boolean drive(){
-        return speed!=0;
+
+    // 加速，速度不超过最大值。
+    public void accelerate(double delta) {
+        if (delta > 0) {
+            speed = Math.min(maxSpeed, speed + delta);
+        }
     }
-    public double turn(double turn_angle){
-        this.turn_angle+=turn_angle;
-        return this.turn_angle;
+
+    // 减速，速度不低于 0。
+    public void brake(double delta) {
+        if (delta > 0) {
+            speed = Math.max(0, speed - delta);
+        }
     }
-    public double addfuel(double amount){
-        if(amount+this.fuel_amount>=60)this.fuel_amount=60;
-        else this.fuel_amount+=amount;
-        return fuel_amount;
+
+    public boolean isDriving() {
+        return speed > 0;
     }
-    public double remaining_fuel(){
-        return fuel_amount;
+
+    public static int getCarCount() {
+        return carCount;
     }
-    public double current_speed(){
-        return speed;
+
+    public String getSerialNumber() {
+        return serialNumber;
     }
-    public void accelerate(double dv){
-        speed+=dv;
+
+    public String getBrand() {
+        return brand;
     }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
     public void setColor(String color) {
         this.color = color;
     }
-    public void setEngine(String engine) {
-        this.engine = engine;
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getFuel() {
+        return fuel;
     }
 }

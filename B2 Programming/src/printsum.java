@@ -1,14 +1,20 @@
 import java.util.Scanner;
+
 public class printsum {
     public static void main(String[] args) {
-        Scanner s=new Scanner(System.in);//create a new scanner class to read input
-        int n=0;
-        int sum=0;
-        n=s.nextInt();//how many numbers will be input next
-        while(n!=0){
-            sum+=n;
-            n=s.nextInt();
+        Scanner scanner = new Scanner(System.in);
+
+        // 输入一串整数，以 0 结尾，输出它们的和。
+        int sum = 0;
+        while (true) {
+            int x = scanner.nextInt();
+            if (x == 0) {
+                break;
+            }
+            sum += x;
         }
+
         System.out.println(sum);
+        scanner.close();
     }
 }

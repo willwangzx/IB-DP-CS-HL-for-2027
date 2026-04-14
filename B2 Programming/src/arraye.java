@@ -1,40 +1,38 @@
-import java.util.ArrayList;
-class myarray{
-    static int[] ay;
-    myarray(int data[]){
-        ay=data;
-    }
-    public int max(){
-        if(ay.length<=0)return 0;
-        int ma=0;
-        for(int i=0;i<ay.length;i++){
-            if(ma<ay[i]){
-                ma=ay[i];
-            }
-        }
-        return ma;
-    }
-    public int min(){
-        if(ay.length<=0)return 0;
-        int mn=2147364847;
-        for(int i=0;i<ay.length;i++){
-            if(mn>ay[i]){
-                mn=ay[i];
-            }
-        }
-        return mn;
-    }
-    public void outp(){
-        for(int i=0;i<ay.length;i++){
-            System.out.print(ay[i]+" ");
-        }
-    }
-}
+import java.util.Scanner;
+
+// 常见数组练习：读入 n 个数，输出最大值和最小值。
 public class arraye {
-    public static void main(String[] args) {
-        ArrayList<Integer> n=new ArrayList<Integer>();
-        int[] m=new int[114];
-        myarray a=new myarray(m);
+    public static int max(int[] arr) {
+        int ans = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > ans) {
+                ans = arr[i];
+            }
+        }
+        return ans;
     }
 
+    public static int min(int[] arr) {
+        int ans = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < ans) {
+                ans = arr[i];
+            }
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        System.out.println(max(arr));
+        System.out.println(min(arr));
+        scanner.close();
+    }
 }
