@@ -74,4 +74,12 @@ public class carclass {
     public double getFuel() {
         return fuel;
     }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
 }
