@@ -1,81 +1,78 @@
 public class carclass {
-    // 类属性：所有汽车共享。
-    private static String brand;
-    private static int number = 0;
+    private static int carCount = 0;
 
-    // 实例属性：每辆车独有。
     private final String serialNumber;
-    private String model;
-    private String engine;
+    private String brand;
     private String color;
-    private double fuelAmount;
     private final double maxSpeed;
     private double speed;
-    private double turnAngle;
+    private double fuel;
 
-    public carclass(String serialNumber, String color, double maxSpeed) {
+    public carclass(String serialNumber, String brand, String color, double maxSpeed) {
         this.serialNumber = serialNumber;
+        this.brand = brand;
         this.color = color;
         this.maxSpeed = maxSpeed;
-        number++;
+        this.speed = 0;
+        this.fuel = 0;
+        carCount++;
     }
 
-    public static void setBrand(String b) {
-        brand = b;
+    // 加油，最大油量按 60L 处理。
+    public void addFuel(double amount) {
+        if (amount > 0) {
+            fuel = Math.min(60, fuel + amount);
+        }
     }
 
-    public static String getBrand() {
+    // 加速，速度不超过最大值。
+    public void accelerate(double delta) {
+        if (delta > 0) {
+            speed = Math.min(maxSpeed, speed + delta);
+        }
+    }
+
+    // 减速，速度不低于 0。
+    public void brake(double delta) {
+        if (delta > 0) {
+            speed = Math.max(0, speed - delta);
+        }
+    }
+
+    public boolean isDriving() {
+        return speed > 0;
+    }
+
+    public static int getCarCount() {
+        return carCount;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public String getBrand() {
         return brand;
     }
 
-    public static int getNumber() {
-        return number;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    /**
-     * 是否处于行驶状态。
-     */
-    public boolean drive() {
-        return speed != 0;
-    }
-
-    /**
-     * 转向：累计方向盘角度。
-     */
-    public double turn(double deltaAngle) {
-        this.turnAngle += deltaAngle;
-        return this.turnAngle;
-    }
-
-    /**
-     * 加油：油量上限 60。
-     */
-    public double addFuel(double amount) {
-        fuelAmount = Math.min(60, fuelAmount + amount);
-        return fuelAmount;
-    }
-
-    public double getRemainingFuel() {
-        return fuelAmount;
-    }
-
-    public double getCurrentSpeed() {
-        return speed;
-    }
-
-    /**
-     * 加速，同时限制最大车速。
-     */
-    public void accelerate(double deltaSpeed) {
-        speed = Math.min(maxSpeed, speed + deltaSpeed);
+    public String getColor() {
+        return color;
     }
 
     public void setColor(String color) {
         this.color = color;
     }
 
-    public void setEngine(String engine) {
-        this.engine = engine;
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getFuel() {
+        return fuel;
     }
 
     public void setModel(String model) {

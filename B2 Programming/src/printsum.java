@@ -2,15 +2,16 @@ import java.util.Scanner;
 
 public class printsum {
     public static void main(String[] args) {
-        // 创建 Scanner 读取用户输入。
         Scanner scanner = new Scanner(System.in);
 
-        // 读取整数并累加；当读到 0 时结束。
+        // 输入一串整数，以 0 结尾，输出它们的和。
         int sum = 0;
-        int number = scanner.nextInt();
-        while (number != 0) {
-            sum += number;
-            number = scanner.nextInt();
+        while (true) {
+            int x = scanner.nextInt();
+            if (x == 0) {
+                break;
+            }
+            sum += x;
         }
 
         System.out.println(sum);

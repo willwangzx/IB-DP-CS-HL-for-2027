@@ -1,56 +1,39 @@
-/**
- * 基于数组的简单队列实现（循环队列）。
- */
-class Queue {
-    private final int[] data;
-    private int head = 0;
-    private int tail = 0;
-    private int size = 0;
-
-    Queue(int capacity) {
-        this.data = new int[capacity];
-    }
-
-    public void enqueue(int value) {
-        if (size == data.length) {
-            throw new IllegalStateException("Queue is full");
-        }
-        data[tail] = value;
-        tail = (tail + 1) % data.length;
-        size++;
-    }
-
-    public int dequeue() {
-        if (isEmpty()) {
-            throw new IllegalStateException("Queue is empty");
-        }
-        int frontValue = data[head];
-        head = (head + 1) % data.length;
-        size--;
-        return frontValue;
-    }
-
-    public int front() {
-        if (isEmpty()) {
-            throw new IllegalStateException("Queue is empty");
-        }
-        return data[head];
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-}
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
 public class myqueue {
     public static void main(String[] args) {
-        Queue queue = new Queue(5);
-        queue.enqueue(10);
-        queue.enqueue(20);
-        queue.enqueue(30);
+        Scanner scanner = new Scanner(System.in);
+        Queue<Integer> queue = new LinkedList<>();
 
-        System.out.println(queue.front());   // 10
-        System.out.println(queue.dequeue()); // 10
-        System.out.println(queue.front());   // 20
+        // 输入操作次数 q。
+        int q = scanner.nextInt();
+
+        // 约定操作：
+        // 1 x -> 入队 x
+        // 2   -> 出队并打印；空队列打印 "Empty"
+        // 3   -> 打印队首；空队列打印 "Empty"
+        for (int i = 0; i < q; i++) {
+            int op = scanner.nextInt();
+            if (op == 1) {
+                int x = scanner.nextInt();
+                queue.offer(x);
+            } else if (op == 2) {
+                if (queue.isEmpty()) {
+                    System.out.println("Empty");
+                } else {
+                    System.out.println(queue.poll());
+                }
+            } else if (op == 3) {
+                if (queue.isEmpty()) {
+                    System.out.println("Empty");
+                } else {
+                    System.out.println(queue.peek());
+                }
+            }
+        }
+
+        scanner.close();
     }
 }
